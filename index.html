@@ -1,196 +1,457 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Document</title>
+
     <style>
+
         * {
+
             font-family: tahoma;
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
+
         }
+
         body {
+
             width: 100%;
+
             height: 100vh;
+
             display: grid;
+
             grid-template-columns: 100%;
+
             grid-template-rows: 50px calc(100% - 50px);
+
             background-color: whitesmoke;
+
         }
+
         .nav {
+
             background-color: black;
+
+            display: grid;
+
+            grid-template-columns: 10% 10%;
+
+            align-items: center;
+
+            justify-items: center;
+
+            gap: 70%;
+
+            padding: 0 5%;
+
         }
+
         .body {
+
             background: white;
+
             margin: 20px 25px;
+
             box-shadow: 0 0 5px black;
+
             border-radius: 10px;
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: start;
+
             overflow: hidden;
+
             padding-top: 60px;
+
         }
+
         .body .cont {
+
             height: 300px;
+
             width: 300px;
+
             background: #ccc;
+
             border-radius: 50%;
+
             border: 15px solid #dde;
+
             position: relative;
+
             overflow: hidden;
+
             transition: 3s;
+
             margin-top: 60px;
+
         }
+
         .cont div {
+
             height: 50%;
+
             width: 135px;
+
             position: absolute;
+
             clip-path: polygon(100% 0,50% 100%,0 0);
+
             transform: translate(-50%);
+
             transform-origin: bottom;
+
             text-align: center;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             font-size: 20px;
+
             font-weight: bold;
+
             color: #fff;
+
             left: 67px;
+
         }
+
         .cont .one {
+
             background-color: orangered;
+
             left: 50%;
+
         }
+
         .cont .two {
+
             background-color: white;
+
             transform: rotate(45deg);
+
         }
+
         .cont .three {
+
             background-color: orangered;
+
             transform: rotate(90deg);
+
         }
+
         .cont .four {
+
             background-color: white;
+
             transform: rotate(135deg);
+
         }
+
         .cont .five {
+
             background-color: orangered;
+
             transform: rotate(180deg);
+
         }
+
         .cont .six {
+
             background-color: white;
+
             transform: rotate(225deg);
+
         }
+
         .cont .svin {
+
             background-color: orangered;
+
             transform: rotate(270deg);
+
         }
+
         .cont .eight {
+
             background-color: white;
+
             transform: rotate(315deg);
+
         }
+
         #spin {
+
             position: absolute;
+
             top: 50%;
+
             left: 50%;
+
             transform: translate(-50%, -50%);
+
             z-index: 10;
+
             background-color: #e2e2e2;
+
             text-transform: uppercase;
+
             border: 8px solid #fff;
+
             font-weight: bold;
+
             font-size: 14px;
+
             color: #ffffff;
+
             width: 60px;
+
             height: 60px;
+
             border-radius: 50%;
+
             cursor: pointer;
+
             outline: none;
+
             letter-spacing: 1px;
+
         }
+
         .gift {
+
             position: absolute;
+
             width: 75%;
+
             height: 170px;
+
             background-color: white;
+
             border-radius: 10px;
+
             box-shadow: 0 0 6px;
+
             top: 50%;
+
             left: 50%;
+
             z-index: 10000;
+
             transform: translate(-50%, -50%);
+
             display: none;
+
             flex-direction: column;
+
             justify-content: end;
+
             align-items: center;
+
             gap: 19%;
+
             transition: 2s;
+
             opacity: 0;
+
         }
+
         .gift h2 {
+
             text-align: center;
+
         }
+
         .Close {
+
             background: orangered;
+
             color: white;
+
             padding: 5px 15px;
+
             font-weight: 800;
+
             border: none;
+
             border-radius: 10px;
+
             margin-bottom: 5%;
+
         }
+
+        .counter {
+
+            width: 120px;
+
+            height: 70%;
+
+            background: white;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+
+        }
+
     </style>
+
 </head>
+
 <body>
-    <div class="nav"></div>
+
+    <div class="nav">
+
+        <h2 class="logo" style="color: white;">B<span style="color: orangered;">.</span>TECH</h2>
+
+        <div class="counter" dir="rtl"><span> 1 </span>محاولة</div>
+
+    </div>
+
     <div class="body">
+
         <h1>عجلة حظ بي تك</h1>
+
         <div class="wheel">
+
             <button id="spin">Spin</button>
+
             <div class="cont">
+
                 <div class="one"></div>
+
                 <div class="two"></div>
+
                 <div class="three"></div>
+
                 <div class="four"></div>
+
                 <div class="five"></div>
+
                 <div class="six"></div>
+
                 <div class="svin"></div>
+
                 <div class="eight"></div>
+
             </div>
+
         </div>
+
     </div>
+
     <div class="gift">
+
         <h2>مبروك كسب كوبون خصم %10</h2>
+
         <button class="Close">إغلاق</button>
+
     </div>
+
 </body>
+
 <script>
+
     let container = document.querySelector(".cont")
+
     let btn = document.getElementById("spin")
+
     let number = Math.ceil(Math.random() * 1000)
+
     let Close = document.querySelector(".Close")
-    let arr = ["خصم %3 على فاتورتك النهاردة","قسيمة شراء بـ100 جنيه لمشترياتك الجاية","اشتري بـ30,000 وخد خصم %5","حظ أوفر المرة الجاية","قسيمة شحن مجاني لأي طلب أونلاين","إعادة مرة اخرى"]
+
+    let arr = ["خصم %3 على فاتورتك النهاردة","قسيمة شراء بـ100 جنيه لمشترياتك الجاية","اشتري بـ30,000 وخد خصم %5","حظ أوفر المرة الجاية","قسيمة شحن مجاني لأي طلب أونلاين"]
+
     btn.onclick = () => {
+
+    if(document.querySelector(".counter span").textContent > 0) {
+
+        document.querySelector(".counter span").textContent = 0
+
         container.style.transform = "rotate(" + number + "deg)"
+
         number += Math.ceil(Math.random() * 3000)
+
         setTimeout(() => {
+
             let randomitem = arr[Math.floor(Math.random() * arr.length)]
+
             document.querySelector(".gift h2").textContent = randomitem
+
             document.querySelector(".gift").style.display = "flex"
+
             let i = 0
+
             setInterval(() => {
+
                 i += 15
+
                 document.querySelector(".gift").style.opacity = i
+
             },100)
+
         },3000)
-        } 
-        Close.onclick = () => {
-            document.querySelector(".gift").style.opacity = 0
-            document.querySelector(".gift").style.display = "none"
+
         }
+
+        else {
+
+            setTimeout(() => {
+
+            document.querySelector(".gift h2").textContent = "عذراً لقد انتهت كل محولاتك لهذا الاسبوع"
+
+            document.querySelector(".gift").style.display = "flex"
+
+            let i = 0
+
+            setInterval(() => {
+
+                i += 15
+
+                document.querySelector(".gift").style.opacity = i
+
+            },100)
+
+        },100)
+
+        } 
+
+    }
+
+        Close.onclick = () => {
+
+            document.querySelector(".gift").style.opacity = 0
+
+            document.querySelector(".gift").style.display = "none"
+
+        }
+
 </script>
+
 </html>
